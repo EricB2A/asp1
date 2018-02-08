@@ -13,7 +13,7 @@ namespace Scrasp.Models
 		private int points;    
         private List<Task> tasks;
 
-        public Story(string description, string refName, string actor, int type, int state, int points, List<Task> tasks)
+        public Story(string description = null, string refName = null, string actor = null, int type = 0, int state = 0, int points = 0, List<Task> tasks = null)
         {
             this.description = description;
             this.refName = refName;

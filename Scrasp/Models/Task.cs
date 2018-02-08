@@ -3,22 +3,23 @@ namespace Scrasp.Models
 {
     public class Task
     {
-        private int description;
+        private string description;
         private int state;
         private User owner;
         private DateTime plannedStart;
         private int plannedDuration;
+        private string description1;
 
-        public Task(int description, int state, User owner, DateTime plannedStart, int plannedDuration)
+        public Task(string description = null, int state = 0, User owner = null, DateTime? plannedStart = null, int plannedDuration = 0)
         {
             this.description = description;
             this.state = state;
             this.owner = owner;
-            this.plannedStart = plannedStart;
+            this.plannedStart = plannedStart ?? DateTime.MinValue;
             this.plannedDuration = plannedDuration;
         }
 
-        public int Description { get { return description; } }
+        public string Description { get { return description; } }
         public int State { get { return state; } }
         public User Owner { get { return owner; } }
         public DateTime PlannedStart { get { return plannedStart; } }

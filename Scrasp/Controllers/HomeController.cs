@@ -9,13 +9,37 @@ namespace Scrasp.Controllers
 {
     public class HomeController : Controller
     {
+        private List<Story> stories;
+        private List<User> users;
+
+        public HomeController()
+        {
+            List<Task> newTasks = new List<Task>();
+            List<Story> newStories = new List<Story>();
+            List<User> newUsers = new List<User>();
+
+            Story story = new Story(description: "Semaine 01", tasks: newTasks);
+            Task task1 = new Task(description: "Ajouter du bois.");
+            Task task2 = new Task(description: "Acheter du pain.");
+            Task task3 = new Task(description: "Acheter du vin");
+            User user1 = new User(1, "Eric", "Password", "étudiant");
+            User user2 = new User(2, "Sam", "Password", "étudiant");
+
+            newTasks.Add(task1);
+            newTasks.Add(task2);
+            newTasks.Add(task3);
+            newStories.Add(story);
+            newUsers.Add(user1);
+            newUsers.Add(user2);
+            this.stories = newStories;
+            this.users = newUsers;
+        }
+
         public ActionResult Index()
         {
-            Story story = new Story(description: "Ajouter matériel dans cabanne");
-            Console.WriteLine(story);
-            Console.WriteLine("Test Test re");
-            List<string> todo = getTodoList(); 
-            ViewBag.Todo = todo;
+            ViewBag.Users = this.users;
+            ViewBag.Stories = this.stories;
+            ViewBag.Todo = getTodoList();
 
             return View();
         }
@@ -33,8 +57,13 @@ namespace Scrasp.Controllers
             ViewBag.Todo = todo;
 
             // Ajoutez-y un utilisateur supplémentaire
-            // ...
+            User user = new Models.User(3, "Paul", "Password", "ingénieur en sécurité");
+            this.users.Add(user);
+           
+            ViewBag.Users = this.users;
+            ViewBag.Stories = this.stories;
             ViewBag.Message = "Utilisateur ajouté";
+            
             return View("Index");
         }
 
@@ -43,10 +72,35 @@ namespace Scrasp.Controllers
             // Préparez vos données comme dans la méthode Index
             List<string> todo = getTodoList();
             ViewBag.Todo = todo;
+            
+            Boolean flagFound = false;
+            Console.WriteLine("====");
+            Console.WriteLine(this.users);
+            Console.WriteLine("====");
 
-            // Ajoutez-y un utilisateur supplémentaire
-            // ...
-            ViewBag.Message = string.Format("Utilisateur {0} renommé",id);
+            // Trouve l'utilisateur avec l'id
+            foreach (User user in this.users)
+            {
+
+                if (user.Id.Equals(id))
+                {
+                    // Utilsateur trouvé 
+                    flagFound = true;
+                    user.UserName = "Jacky";
+                }
+            }
+            if (flagFound)
+            {
+                ViewBag.Message = string.Format("Utilisateur {0} renommé", id);
+            }
+            else
+            {
+                ViewBag.Message = string.Format("Utilisateur introuvable");
+            }
+
+            ViewBag.Stories = this.stories;
+            ViewBag.Users = this.users;
+
             return View("Index");
         }
 

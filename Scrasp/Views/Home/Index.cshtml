@@ -1,26 +1,47 @@
 ﻿@{
     ViewBag.Title = "Accueil";
     List<string> todolist = ViewBag.Todo;
+    List<Scrasp.Models.User> users = ViewBag.Users;
+    List<Scrasp.Models.Story> stories = ViewBag.Stories;
 }
 
 @if (ViewBag.Message != null)
 {
     <div class="alert-info">@ViewBag.Message</div>
 }
-<div class="container">
-    <h3>A faire</h3>
-    <ul>
-        @foreach (string item in todolist)
+    <div class="container">
+        <h3>A faire</h3>
+        <ul>
+            @foreach (string item in todolist)
         {
             <li>@item</li>
-        }
-    </ul>
-</div>
+    }
+        </ul>
+    </div>
 <div class="container">
     <h3>Données</h3>
     <h4>Stories</h4>
-    <h4>Tâches</h4>
+    @foreach (Scrasp.Models.Story story in stories)
+    {
+        <h5> @story.Description </h5>
+        <h6>Tâches</h6>
+        <ul>
+            @foreach (Scrasp.Models.Task task in story.Tasks)
+            {
+                <li> @task.Description </li>
+            }
+        </ul>
+    }
     <h4>Personnes</h4>
+    <table>
+    @foreach (Scrasp.Models.User user in users)
+    {
+        <tr>
+            <td>@user.UserName</td>
+            <td>@user.Role</td>
+        </tr>
+    }
+    </table>
 </div>
 <div class="container">
     <h3>Actions</h3>

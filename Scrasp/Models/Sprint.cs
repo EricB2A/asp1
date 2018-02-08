@@ -11,12 +11,12 @@ namespace Scrasp.Models
         private DateTime endDate;
         private List<Story> stories;
     
-        public Sprint(int number, string description, DateTime startDate, DateTime endDate, List<Story> stories)
+        public Sprint(int number = 0, string description = null, DateTime? startDate = null, DateTime? endDate = null, List<Story> stories = null)
         {
             this.number = number;
             this.description = description;
-            this.startDate = startDate;
-            this.endDate = endDate;
+            this.startDate = startDate ?? DateTime.MinValue;
+            this.endDate = endDate ?? DateTime.MinValue;
             this.stories = stories;
         }
 

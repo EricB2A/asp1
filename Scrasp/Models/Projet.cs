@@ -11,7 +11,7 @@ namespace Scrasp.Models
         private List<User> team;
         private List<Sprint> sprints;
 
-        public Projet(string title, string description, string refRepo, List<User> team, List<Sprint> sprints)
+        public Projet(string title = null, string description = null, string refRepo = null, List<User> team = null, List<Sprint> sprints = null)
         {
             this.title = title;
             this.description = description;
