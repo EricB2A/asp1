@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Scrasp.Models;
 
 namespace Scrasp.Controllers
 {
@@ -10,6 +11,9 @@ namespace Scrasp.Controllers
     {
         public ActionResult Index()
         {
+            Story story = new Story(description: "Ajouter matériel dans cabanne");
+            Console.WriteLine(story);
+            Console.WriteLine("Test Test re");
             List<string> todo = getTodoList(); 
             ViewBag.Todo = todo;
 
