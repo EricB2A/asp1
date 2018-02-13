@@ -24,6 +24,8 @@ namespace Scrasp.Controllers
             Task task3 = new Task(description: "Acheter du vin");
             User user1 = new User(1, "Eric", "Password", "étudiant");
             User user2 = new User(2, "Sam", "Password", "étudiant");
+            User user3 = new User(3, "Gaël", "Password", "étudiant");
+            User user4 = new User(4, "Abraham", "Password", "président");
 
             newTasks.Add(task1);
             newTasks.Add(task2);
@@ -31,6 +33,8 @@ namespace Scrasp.Controllers
             newStories.Add(story);
             newUsers.Add(user1);
             newUsers.Add(user2);
+            newUsers.Add(user3);
+            newUsers.Add(user4);
             this.stories = newStories;
             this.users = newUsers;
         }
@@ -57,7 +61,7 @@ namespace Scrasp.Controllers
             ViewBag.Todo = todo;
 
             // Ajoutez-y un utilisateur supplémentaire
-            User user = new Models.User(3, "Paul", "Password", "ingénieur en sécurité");
+            User user = new Models.User(5, "Paul", "Password", "ingénieur en sécurité");
             this.users.Add(user);
            
             ViewBag.Users = this.users;
@@ -87,11 +91,10 @@ namespace Scrasp.Controllers
         }
 
         public ActionResult ChangeId(int fromId, int toId){
-            Boolean flagChanged = false;
             foreach (Models.User user in this.users){
                 if (user.Id.Equals(fromId)){
-           
-                    flagChanged = true;
+                    user.Id = 10;
+                    ViewBag.message = string.Format("Utilisateur {0} changé en {1}", user.UserName, user.Id.ToString());
                 }
             }
 

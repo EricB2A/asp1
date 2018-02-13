@@ -28,11 +28,13 @@ namespace Scrasp
                 url: "delete/{id}",
                 defaults: new { controller = "Home", action = "Delete", id = UrlParameter.Optional }
             );
+
             routes.MapRoute(
                 name: "ChangeId",
-                url: "changeid/{fromId/{toId}",
-                defaults: new { controller = "Home", action = "ChandeId", fromId = UrlParameter.Optional, toId = UrlParameter.Optional }
+                url: "changeid/{fromId}/{toId}",
+                defaults: new { controller = "Home", action = "ChangeId", fromId = "", toId = "" }
             );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

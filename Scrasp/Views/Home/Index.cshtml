@@ -37,6 +37,7 @@
     @foreach (Scrasp.Models.User user in users)
     {
         <tr>
+            <td>@user.Id</td>
             <td>@user.UserName</td>
             <td>@user.Role</td>
         </tr>
