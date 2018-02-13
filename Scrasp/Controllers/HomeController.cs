@@ -67,6 +67,40 @@ namespace Scrasp.Controllers
             return View("Index");
         }
 
+        public ActionResult Delete(int id){
+            Boolean flagDeleted = false;
+            for (int i = this.users.Count - 1; i >= 0; --i){
+                if (this.users[i].Id.Equals(id)){
+                    this.users.RemoveAt(i);
+                    flagDeleted = true;
+                }
+            }
+            if(flagDeleted){
+                ViewBag.Message = string.Format("Utilisateur {} supprimé", id);
+            }else{
+                ViewBag.Message = string.Format("Utilisateur introuvable");
+            }
+            ViewBag.Todo = getTodoList();
+            ViewBag.Users = this.users;
+            ViewBag.Stories = this.stories;
+            return View("Index");    
+        }
+
+        public ActionResult ChangeId(int fromId, int toId){
+            Boolean flagChanged = false;
+            foreach (Models.User user in this.users){
+                if (user.Id.Equals(fromId)){
+           
+                    flagChanged = true;
+                }
+            }
+
+            ViewBag.Todo = getTodoList();
+            ViewBag.Users = this.users;
+            ViewBag.Stories = this.stories;
+            return View("Index");
+        }
+
         public ActionResult Rename(int id)
         {
             // Préparez vos données comme dans la méthode Index
@@ -74,14 +108,10 @@ namespace Scrasp.Controllers
             ViewBag.Todo = todo;
             
             Boolean flagFound = false;
-            Console.WriteLine("====");
-            Console.WriteLine(this.users);
-            Console.WriteLine("====");
 
             // Trouve l'utilisateur avec l'id
-            foreach (User user in this.users)
+            foreach (Models.User user in this.users)
             {
-
                 if (user.Id.Equals(id))
                 {
                     // Utilsateur trouvé 
@@ -89,6 +119,7 @@ namespace Scrasp.Controllers
                     user.UserName = "Jacky";
                 }
             }
+
             if (flagFound)
             {
                 ViewBag.Message = string.Format("Utilisateur {0} renommé", id);

@@ -10,11 +10,12 @@ namespace Scrasp.Models
 
         public User(int id, string userName = null, string password = null, string role = null)
         {
+            this.id = id;
             this.userName = userName;
             this.password = password;
             this.role = role;
         }
-        public int Id { get { return id; } }
+        public int Id { get { return id; } set { id = value; } }
         public string UserName { get { return userName; } set { userName = value; }  }
         public string Password { get { return password; } }
         public string Role { get { return role; } set { role = value; }  }
